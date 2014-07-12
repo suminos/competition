@@ -1,0 +1,4 @@
+competition
+===========
+
+Library for competition
