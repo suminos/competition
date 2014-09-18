@@ -59,13 +59,12 @@ struct FenwickTree {
   }
 };
 
-// unverified
-// x \in [1,w], y \in [1,h]
+// x \in [1,n], y \in [1,m]
 struct FenwickTree2D {
-  int n;
+  int n, m;
   vector<FenwickTree> v;
-  
-  FenwickTree(int w, int h): w(w), h(h), v(h+1, vector<FenwickTree>(w)) {}
+
+  FenwickTree2D(int n, int m): n(n), m(m), v(n+1, FenwickTree(m)) {}
   int sum(int x, int y) {
     int s = 0;
     while(y > 0) {
@@ -74,12 +73,13 @@ struct FenwickTree2D {
     }
     return s;
   }
-  
+
   void add(int x, int y, int val) {
     while(y <= n) {
-      v[y].add(x) += val;
+      v[y].add(x, val);
       y += y & -y;
     }
+  }
 };
 
 struct RollingHash {
